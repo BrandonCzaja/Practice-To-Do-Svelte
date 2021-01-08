@@ -85,6 +85,20 @@
 		editBody = todo.body;
 		editId = todo.id;
 	};
+
+	///////////
+	// DELETE
+	///////////
+	// Delete Todos
+	const deleteTodo = async (todo) => {
+		event.preventDefault();
+		await fetch(baseUrl + "/" + todo.id, {
+			method: "delete",
+		});
+
+		// Refresh todos list
+		getTodos();
+	};
 </script>
 
 <style>
@@ -114,6 +128,7 @@
 			<h2>{todo.title}</h2>
 			<h3>{todo.body}</h3>
 			<button on:click={(e) => editSelect(todo)}>Edit</button>
+			<button on:click={(e) => deleteTodo(todo)}>Delete</button>
 		</div>
 	{/each}
 </main>
